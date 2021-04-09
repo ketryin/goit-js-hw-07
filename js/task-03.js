@@ -17,9 +17,24 @@ const images = [
 ];
 
 const galleryEl = document.querySelector('#gallery');
-const createGalleryEl = images.reduce(
-    (string, item) => string + `<li><img class="img" src='${item.url}' alt='${item.alt}'></li>`,
-  ""
-);
 
-galleryEl.insertAdjacentHTML('afterbegin', createGalleryEl);
+// const createGalleryEl = images.reduce(
+//     (string, item) => string + `<li><img class="imge" src='${item.url}' alt='${item.alt}'></li>`,
+//   ""
+// );
+// galleryEl.insertAdjacentHTML('afterbegin', createGalleryEl);
+
+const createGalleryEl = images.map(({url, alt}) => {
+  const galleryItemEl = document.createElement('li');
+
+  const imagesEl = document.createElement('img');
+  imagesEl.classList.add('imge');
+  imagesEl.src = url;
+  imagesEl.alt = alt;
+
+  galleryItemEl.append(imagesEl);
+
+  return galleryItemEl;
+})
+
+galleryEl.append(...createGalleryEl)
